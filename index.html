@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReStart Consoles | Tienda de Videojuegos</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- ========================================================= -->
+  <!-- PEGA AQUÍ TU CÓDIGO DEL PÍXEL DE META QUÉ GENERES EN PASO 3 -->
+  <!-- ========================================================= -->
+  
+</head>
+<body>
+
+  <!-- Encabezado / Navbar -->
+  <header class="navbar">
+    <div class="logo">ReStart <span>Consoles</span></div>
+    <nav>
+      <ul>
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#contacto">Redes Sociales</a></li>
+        <li>
+          <button id="cartBtn" class="cart-nav-btn">
+            🛒 Carrito <span id="cartCount" class="badge">0</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>ReStart Consoles</h1>
+    <p>Las mejores consolas, accesorios y componentes al mejor precio del mercado.</p>
+    <a href="#catalogo" class="btn-primary">Ver Catálogo</a>
+  </section>
+
+  <!-- Carrusel de Servicios y Promociones -->
+  <section class="carousel-section">
+    <div class="carousel-container">
+      
+      <!-- Slide 1: Ventas -->
+      <div class="carousel-slide active">
+        <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=1200&q=80" alt="Venta de Consolas">
+        <div class="carousel-caption">
+          <span>Servicio Oficial</span>
+          <h2>Venta de Consolas y Videojuegos</h2>
+          <p>Encuentra las mejores marcas, ediciones especiales y accesorios con garantía oficial.</p>
+        </div>
+      </div>
+
+      <!-- Slide 2: Servicio Técnico -->
+      <div class="carousel-slide">
+        <img src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=1200&q=80" alt="Servicio Técnico">
+        <div class="carousel-caption">
+          <span>Soporte Especializado</span>
+          <h2>Servicio Técnico Profesional</h2>
+          <p>Diagnóstico preciso y reparación de fallas en placa, HDMI, lectoras y mandos.</p>
+        </div>
+      </div>
+
+      <!-- Slide 3: Mantenimiento -->
+      <div class="carousel-slide">
+        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1200&q=80" alt="Mantenimiento Preventivo">
+        <div class="carousel-caption">
+          <span>Cuidado para tus consolas</span>
+          <h2>Mantenimiento Preventivo</h2>
+          <p>Limpieza profunda y cambio de pasta térmica / metal líquido para evitar sobrecalentamientos.</p>
+        </div>
+      </div>
+
+      <!-- Controles del Carrusel -->
+      <button class="carousel-btn prev" id="prevSlide">&#10094;</button>
+      <button class="carousel-btn next" id="nextSlide">&#10095;</button>
+
+      <!-- Indicadores de puntos abajo -->
+      <div class="carousel-dots">
+        <span class="dot active" onclick="currentSlide(0)"></span>
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Catálogo de Productos -->
+  <main class="container" id="catalogo">
+    <h2>Nuestros Productos</h2>
+    <div class="grid-products" id="productGrid"></div>
+  </main>
+
+  <!-- Side Drawer: Carrito de Compras -->
+  <div id="cartDrawer" class="cart-drawer">
+    <div class="cart-header">
+      <h3>Tu Carrito</h3>
+      <span class="close-drawer" id="closeCart">&times;</span>
+    </div>
+    <div class="cart-body" id="cartItems">
+      <!-- Elementos del carrito cargados por JS -->
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <button id="checkoutBtn" class="btn-primary btn-block">Procesar Compra</button>
+    </div>
+  </div>
+  <div id="cartOverlay" class="cart-overlay"></div>
+
+  <!-- Modal 1: Detalles del Producto -->
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <img id="modalImg" src="" alt="Imagen del producto">
+      <div class="modal-info">
+        <h2 id="modalTitle"></h2>
+        <p id="modalCategory" class="modal-category"></p>
+        <p id="modalDesc" class="modal-desc"></p>
+        <ul id="modalSpecs" class="modal-specs"></ul>
+        <div class="modal-footer">
+          <span id="modalPrice" class="price"></span>
+          <button id="modalBuyBtn" class="btn-primary">Añadir al Carrito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Ticket de Compra y Agradecimiento (Diseño Eleganter) -->
+  <div id="ticketModal" class="modal">
+    <div class="modal-content ticket-modal-content">
+      <span class="close-btn" id="closeTicketModal">&times;</span>
+      
+      <div class="success-badge">✓</div>
+      
+      <div class="ticket-header-text">
+        <h2>¡Gracias por tu compra!</h2>
+        <p>Tu orden ha sido generada correctamente.</p>
+      </div>
+      
+      <!-- Ticket estilo recibo físico -->
+      <div class="receipt-paper">
+        <div class="receipt-brand">
+          <strong>RESTART CONSOLES</strong>
+          <span id="ticketDate">--/--/----</span>
+        </div>
+        
+        <div id="ticketProducts" class="receipt-items">
+          <!-- Carga dinámicamente desde JS -->
+        </div>
+        
+        <hr class="receipt-divider">
+        
+        <div class="receipt-total">
+          <span>TOTAL</span>
+          <span id="ticketTotalAmount">$0.00</span>
+        </div>
+      </div>
+
+      <button id="whatsappBtn" class="btn-whatsapp-pro">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+        </svg>
+        Enviar Pedido por WhatsApp
+      </button>
+    </div>
+  </div>
+  </div>
+
+  <!-- Footer y Redes Sociales -->
+  <footer id="contacto">
+    <div class="footer-content">
+      <h3>Síguenos en nuestras redes</h3>
+      <div class="social-links">
+        <a href="#" target="_blank" class="social-btn">Facebook</a>
+        <a href="#" target="_blank" class="social-btn">Instagram</a>
+      </div>
+      <p class="copyright">&copy; 2026 ReStart Consoles. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
